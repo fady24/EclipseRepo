@@ -1,0 +1,49 @@
+package com.csc.flame.selenium.keywords;
+
+import java.util.Map;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.stereotype.Service;
+import com.csc.flame.selenium.HtmlObject;
+import com.csc.flame.selenium.KeywordResult;
+import com.csc.fsg.flame.model.common.ComponentModel;
+
+
+/**
+Keyword Id = 'Sample'
+Please see FLAME Java Docs at
+http://flame-javadocs.s3-website-us-east-1.amazonaws.com
+to know more about the referenced classes
+**/
+
+@Service("GenAppWaitVerify")
+public class GenAppWaitVerifyKeywordHandler implements KeywordHandler {
+
+	public KeywordResult process(WebDriver driver, HtmlObject htmlObject, ComponentModel componentModel, Map testData) {
+		KeywordResult result = new KeywordResult();
+		
+		String expected_title = testData.get(componentModel.getParam1()).toString();
+		
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("drag-handle")));
+ 		String actual_title = element.getText();
+		
+		
+		if (actual_title.contains(expected_title))
+		{
+			result.setMessage("Title verified succesfully.");
+			result.setResult(true);
+		}else{
+			result.setMessage("Title verification failed.");
+			result.setResult(false);
+		}
+			
+		
+		return result;
+	}
+
+}

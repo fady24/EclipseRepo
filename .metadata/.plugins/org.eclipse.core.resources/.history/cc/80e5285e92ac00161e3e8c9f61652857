@@ -1,0 +1,51 @@
+import java.io.File;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class GenAppWaitVerify {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		File file = new File("D:\\Selenium\\IEDriverServer.exe");
+		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+		WebDriver driver = new InternetExplorerDriver();
+		
+		driver.get("http://20.194.10.199:9088/GenAppAsia_XACT/genAppEnter.do?");
+		
+		
+		   
+		  //To wait for element visible
+		  WebDriverWait wait = new WebDriverWait(driver, 15);
+		  wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("USERID")));
+		  System.out.print("visible");
+		
+	driver.findElement(By.name("USERID")).sendKeys("FIREPOC");
+	driver.findElement(By.name("PASSWORD")).sendKeys("FIREPOC");
+	driver.findElement(By.id("btnLogOn")).click();
+
+
+	for (String winHandle : driver.getWindowHandles()) {
+	    driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+	}
+	
+	System.out.print("Started waitinG");
+	
+	
+	
+	WebElement element = wait.until(
+	        ExpectedConditions.visibilityOfElementLocated(By.className("closeModalWindow")));
+	
+	System.out.print("Clicking now...");
+	
+	driver.findElement(By.className("btnContinue")).click();
+	
+	
+	driver.findElement(By.className("closeModalWindow")).click();
+	
+	System.out.print("Done succesfully");
+	}
+
+}

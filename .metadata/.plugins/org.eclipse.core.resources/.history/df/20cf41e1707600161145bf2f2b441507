@@ -1,0 +1,84 @@
+import org.openqa.selenium.JavascriptExecutor;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Flame1 {
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		Runtime.getRuntime().exec("D:\\abc.vbs", null, new File("D:\\"));
+		
+		//MARK
+		/*
+		 * 
+		 
+		String suitename = args[1];
+		String userID = args[0];
+		
+		suitename = args[1];
+		if (userID == "QTP-1")
+		{
+			userID = "qtp1@csc.com";
+		}
+		else if(userID == "Negi-System")
+		{
+			userID = "anegi7@csc.com";
+		}
+		else
+		{
+			userID = "anegi7@csc.com";
+			
+		}
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		//WebDriver driver = new FirefoxDriver();
+		driver.get("http://20.198.58.123:9595/FLAME/login");
+		driver.manage().window().maximize();
+		driver.findElement(By.id("userName")).sendKeys(userID);
+		driver.findElement(By.id("password")).sendKeys("12345");
+		Select sel = new Select(driver.findElement(By.id("appName")));
+		//driver.findElement(By.id("appName")).
+		sel.selectByVisibleText("Integral SompoCB");
+		driver.findElement(By.xpath("//input[@value='Login']")).click();
+		
+		wait1();
+		
+		//execution
+		driver.findElement(By.linkText("Maintain/Execute Suite")).click();
+		//driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//div/table/tbody/tr/td[2]/span/span/span")).click();
+		driver.findElement(By.xpath("//input[@type='search']")).sendKeys(suitename);
+		driver.findElement(By.xpath("//input[@type='search']")).sendKeys(Keys.ENTER);
+		driver.findElement(By.xpath("//div/table/tbody/tr/td[4]/button")).click();
+		System.out.println("clicking");
+		wait1();
+
+
+			if ( !driver.findElement(By.id("selectAll")).isSelected() )
+			{
+				driver.findElement(By.id("selectAll")).click();
+				wait1();
+				//System.out.println("clicked");
+				//javax.swing.JOptionPane.showMessageDialog(null , "clicked");
+			}
+
+		System.out.print("scroll");
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		driver.findElement(By.xpath("//form[@id='capabilityList']/div/table/tbody/tr[3]/td[2]/button[2]")).click();
+		//javax.swing.JOptionPane.showMessageDialog(null , "Execution Started");
+		*/
+	
+	}
+	public static void wait1() throws InterruptedException
+	{
+		Thread.sleep(1000);
+	}
+}
+

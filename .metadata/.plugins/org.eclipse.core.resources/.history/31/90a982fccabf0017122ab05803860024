@@ -1,0 +1,45 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
+public class TEST {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			
+		Connection conn1 = null;
+		String que = null;
+		ResultSet rs = null;
+		 try{
+	       		conn1 = DriverManager.getConnection(  
+	       				"jdbc:oracle:thin:@192.168.2.12:1522:UATDB","vm1dta","vm1dta12#$");
+	       		conn1.setAutoCommit(false);
+	       		Statement stmt=conn1.createStatement();
+	       		
+	       	 que = "SELECT * FROM ZMIEPF WHERE CHDRNUM = '"+chdrnum + "'";
+             rs = stmt.executeQuery(que);
+        //     err= currentRow.getCell(1).toString().trim();
+             
+             while(rs.next())
+             {	dberr =getDBval(rs,"ERRORDSC");
+             if(dberr.equals(err))
+             {	flag =1;
+             	break;
+             }else
+             {	flag =0;
+             }
+            
+            }
+	       		
+	       		
+		 }catch(Exception e)
+		 {
+			 
+			 JOptionPane.showMessageDialog(null, "Exception. " + e.getMessage() + e.getStackTrace());
+		 }
+	}
+
+}

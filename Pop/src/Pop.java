@@ -1,0 +1,39 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.io.RandomAccessRead;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+
+public class Pop {
+
+
+public static void main(String args[])
+{   
+     String msg = "";
+     File file = new File("D:\\Extract\\pano\\LA-ABSOLUTEASGN-1.pdf");
+     
+     try{
+     PDDocument document = PDDocument.load(file);
+
+     //Instantiate PDFTextStripper class
+     PDFTextStripper pdfStripper = new PDFTextStripper();
+     msg = msg +1;
+     //Retrieving text from PDF document
+     String text = pdfStripper.getText(document);
+     msg = msg +2;
+     System.out.println(text);
+
+     //Closing the document
+     document.close();
+
+     }catch(Exception e)
+     {
+         System.out.print("Exception : " + msg + e.getStackTrace() );
+     }
+
+}   
+}

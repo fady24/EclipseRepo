@@ -1,0 +1,131 @@
+package com.csc.ignasia.selenium.keywords;
+
+import java.util.Map;
+import java.lang.*;
+
+
+import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Service;
+import com.csc.ignasia.selenium.HtmlObject;
+import org.openqa.selenium.WebElement;
+import com.csc.ignasia.selenium.KeywordResult;
+import com.csc.ignasia.selenium.keywords.KeywordHandler;
+import com.csc.fsg.ignasia.model.common.ComponentModel;
+
+
+/**
+Keyword Id = 'Sample'
+Please see FLAME Java Docs at
+http://flame-javadocs.s3-website-us-east-1.amazonaws.com
+to know more about the referenced classes
+**/
+
+@Service("DynamicSwitchWindow")
+public class DynamicSwitchWindowKeywordHandler implements KeywordHandler {
+
+	public KeywordResult process(WebDriver driver, HtmlObject htmlObject, ComponentModel componentModel, Map testData) {
+		KeywordResult result = new KeywordResult();
+	
+		//read data from testData map using Component model params
+		int flag=0;
+		Double t = 0.00;
+		result.setResult(false);			
+		int winno;
+		long waittime;
+		long start;
+		String whandles= null, msg= null;
+		String win = new String();
+		String winTitle = new String();
+			
+		//Set result property of KeywordResult object
+		//result.setResult(true);
+
+
+		if (testData.get(componentModel.getParam1()) == null || testData.get(componentModel.getParam1()).equals(""))
+        {   
+            result.setResult(true);
+            msg= "Switching skipped";
+            result.setMessage(" Switching skipped");
+            //return result;
+        } else
+        {
+		try{
+				winTitle =  testData.get(componentModel.getParam1()).toString();
+				
+		winno = Integer.parseInt(win);
+		
+			waittime = (long) 0.00;
+		
+		if (testData.get(componentModel.getParam2()) == null || testData.get(componentModel.getParam2()).equals(""))
+				waittime = (long) 35.0;
+		else
+				waittime = (long) Long.parseLong(testData.get(componentModel.getParam2()).toString());
+			
+			
+			
+		
+		
+			start = System.nanoTime(); 
+	//some try with nested loops 
+	
+	
+		while(waittime > (long)(System.nanoTime()-start)/1000000000.0)
+		{	t = (System.nanoTime()-start)/1000000000.0;
+		//System.out.println(t.toString());
+		whandles = driver.getWindowHandles().toString();
+		String warray[] = whandles.split(",");
+		//System.out.println("All handles: "+ whandles);
+		winno = warray.length;
+		
+		while (warray.length>=winno && winno >=0)
+		{	//System.out.println("All handles: "+ whandles);
+			
+			warray[winno-1] = warray[winno-1].substring(1, 37);
+			//System.out.println("Switching to: "+ warray[winno-1]);
+			driver.switchTo().window(warray[winno-1]);
+					flag = 2;
+					
+				if (winTitle==driver.getTitle().toString() || winTitle.equals(driver.getTitle().toString()))
+				{	flag = 1;	
+					//System.out.println("Switched succesfully to the window " + d2.getTitle().toString());
+					break;		
+				}		
+				winno--;
+		}
+	}
+	
+
+	if (flag==0)
+	{	
+		msg = "Waited for " + waittime + " secs. Window not found";
+		result.setResult(false);
+	}else if (flag == 1)
+	{	if((driver.getTitle().toString().equals("notitle"))||(driver.getTitle().toString().equals(winTitle)))
+		{
+		msg = " Waited for : " + t + " secs. Switched to :" + driver.getTitle();		
+		result.setResult(true);
+		}
+		else
+		{ss
+		msg = "Expected window title: " + winTitle + " Actual title: " + driver.getTitle().toString();		
+		result.setResult(true);
+		}
+	}else if (flag == 2)
+	{
+		msg = "Waited for " + waittime + " secs. Window title doesnt match on window no. ";
+		result.setResult(false);
+		
+	}
+	
+		}catch(Exception e){
+			msg ="New Exception caught: " + e.getMessage() + e.getStackTrace();
+		}
+
+	}
+	
+	
+		result.setMessage(msg);
+		return result;
+	}
+
+}

@@ -1,0 +1,63 @@
+import java.io.File;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.sun.jna.platform.FileUtils;
+
+public class LogChk {
+
+	public static int main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		int res = 0;
+		try{
+		//fetching parameters from the cl args
+		
+		String webs= args[0];
+		String uid_objid= args[4];
+		String uid= args[1];
+		String pwd_objid = args[5];
+		String pwd = args[2];
+		String lbtn_objid = args[6];
+		String etitle = args[3];
+		
+		WebDriver driver;
+		
+		System.setProperty("webdriver.ie.driver", "D:\\Selenium\\IEDriverServer.exe");
+		driver = new InternetExplorerDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to(webs);
+		driver.wait(2000);
+		driver.findElement(By.id(uid_objid)).sendKeys(uid);
+		driver.findElement(By.id(pwd_objid)).sendKeys(pwd);
+		driver.findElement(By.id(lbtn_objid)).click();
+		driver.wait(3000);
+		String title = driver.getTitle();
+		
+		if((title.equals(etitle)))
+		{
+			res= 1;
+		}
+		driver.wait(15000);
+		
+		/*
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		// Now you can do whatever you need to do with it, for example copy somewhere
+		//FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot.png"));
+		FileUtil
+	*/
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+		
+	}
+
+}

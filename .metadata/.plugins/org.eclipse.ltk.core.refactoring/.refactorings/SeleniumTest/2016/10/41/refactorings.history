@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;MasterSelect.java&apos; to &apos;MasterSelectKeywordHandler.java&apos;&#x0D;&#x0A;- Original project: &apos;SeleniumTest&apos;&#x0D;&#x0A;- Original element: &apos;MasterSelect.java&apos;&#x0D;&#x0A;- Renamed element: &apos;MasterSelectKeywordHandler.java&apos;" description="Rename compilation unit &apos;MasterSelect.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{MasterSelect.java" name="MasterSelectKeywordHandler.java" references="false" stamp="1475824955659" version="1.0"/>
+</session>

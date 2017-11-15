@@ -1,0 +1,85 @@
+import java.awt.List;
+import java.beans.Visibility;
+
+import javax.swing.JOptionPane;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import com.google.common.annotations.VisibleForTesting;
+
+public class Mains {
+	
+	
+    public static void main(String[] args)throws Exception {
+        // TODO Auto-generated method stub
+    
+	System.setProperty("webdriver.ie.driver", "D:\\Selenium\\IEDriverServer.exe");
+WebDriver driver = new InternetExplorerDriver();
+
+driver.get("https://bsib-stag-sso/IntegralAsiaWeb/");
+
+//  override.click();
+  WebElement username = driver.findElement(By.id("userid"));
+  WebElement password = driver.findElement(By.id("password"));
+  WebElement login = driver.findElement(By.id("loginId"));
+  //WebElement Batch = driver.findElement(By.id("")); //batch job status
+  username.sendKeys("pagarwal4");
+  password.sendKeys("pagarwal4");
+  String menuitem = "Underwriting";
+  String xp = "//descendant::div[contains(text(),\"" + menuitem + "\")]";
+  login.click();
+  Thread.sleep(200);
+  driver.switchTo().defaultContent();
+  Thread.sleep(200);
+  driver.switchTo().frame("frameMenu");
+  WebElement menuA = driver.findElement(By.xpath(xp));
+  System.out.println(menuA.getSize());
+  //javax.swing.JOptionPane.showMessageDialog(null, xp);
+  
+  WebElement menuB = driver.findElement(By.xpath("//descendant::div[contains(text(),'Claims')]"));
+  System.out.println("click");
+  menuB.click();
+  Thread.sleep(1000);
+  Actions action = new Actions(driver);
+  // Hold Control
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+
+  /*try{
+	  WebElement menuB = driver.findElement(By.xpath("//descendant::div[contains(text(),'Claims')]"));
+	  menuB.click();
+	  javax.swing.JOptionPane.showMessageDialog(null,"click tried");
+  }
+  catch(Exception e){
+	  e.printStackTrace();
+	  javax.swing.JOptionPane.showMessageDialog(null,"exception found");
+menuA = driver.findElement(By.xpath(xp));
+  menuA.click();
+  Thread.sleep(1000);
+  Actions action = new Actions(driver);
+  // Hold Control
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  action.sendKeys(Keys.ARROW_DOWN);
+  action.perform();
+  Thread.sleep(1000);
+  }*/
+}
+}

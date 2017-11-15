@@ -1,0 +1,141 @@
+import java.io.FileInputStream;
+import org.openqa.selenium.JavascriptExecutor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+
+public class Flame1 {
+
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		//WebDriver driver = new FirefoxDriver();
+		driver.get("http://20.198.58.123:9595/FLAME/login");
+		driver.manage().window().maximize();
+		driver.findElement(By.id("userName")).sendKeys("anegi7@csc.com");
+		driver.findElement(By.id("password")).sendKeys("12345");
+		Select sel = new Select(driver.findElement(By.id("appName")));
+		//driver.findElement(By.id("appName")).
+		sel.selectByVisibleText("Integral SompoCB");
+		driver.findElement(By.xpath("//input[@value='Login']")).click();
+		
+		waitfor();
+		
+		//execution
+		driver.findElement(By.linkText("Maintain/Execute Suite")).click();
+		//driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//div/table/tbody/tr/td[2]/span/span/span")).click();
+		driver.findElement(By.xpath("//input[@type='search']")).sendKeys("BG001_SOMPO");
+		driver.findElement(By.xpath("//input[@type='search']")).sendKeys(Keys.ENTER);
+		driver.findElement(By.xpath("//div/table/tbody/tr/td[4]/button")).click();
+		
+		waitfor();
+		driver.findElement(By.id("selectAll")).click();
+		((JavascriptExecutor) driver)
+        .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		
+		
+		
+		
+		
+		/*
+		//Excel declarations
+		String FilePath = "D://meth.xls";
+		FileInputStream fs = null;
+		Workbook wbk = null;
+		try {
+			fs = new FileInputStream(FilePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			wbk = Workbook.getWorkbook(fs);
+		} catch (BiffException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		waitfor();
+		waitfor();
+		driver.get("http://20.198.58.123:9595/FLAME/applicationTestPlan");
+		waitfor();
+		Sheet sh = wbk.getSheet(0);
+		int i = 5;
+		waitfor();
+		WebDriverWait wt = new WebDriverWait(driver, 20);
+		try {
+			
+		while(sh.getCell(0,i).getContents().toString()!="")
+		{			
+				String val = sh.getCell(0,i).getContents().toString();
+				
+				
+				wt.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Add")));
+						
+				
+				driver.findElement(By.linkText("Add")).click();
+				
+				//driver.switchTo().defaultContent();
+				
+				waitfor();
+				driver.findElement(By.id("addModal_testWorkflowId")).sendKeys("RN001");
+				driver.findElement(By.id("addModal_testId")).sendKeys(val);
+				driver.findElement(By.id("addModal_testIteration")).sendKeys("1");
+				driver.findElement(By.id("addModal_testWorkflowDescription")).sendKeys("RN001_PCR_SOMPO");
+				driver.findElement(By.id("addModal_testDescription")).sendKeys(val);
+				driver.findElement(By.id("addModal_applicationName")).sendKeys("SOMPO");
+				driver.findElement(By.id("addModal_priority")).sendKeys("1");
+				driver.findElement(By.id("addModalButton")).click();
+				
+				
+				
+				System.out.println(val);
+				i++;
+			
+			}} catch (ArrayIndexOutOfBoundsException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.print(i-1);
+			}
+		
+		
+		/*
+		// TODO Auto-generated method stub		
+		/*
+		String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,"t");
+		driver.findElement(By.linkText("20.198.58.123:9595/FLAME/applicationTestPlan")).sendKeys(selectLinkOpeninNewTab);
+		*/
+		
+		//driver.get("http://20.198.58.123:9595/FLAME/applicationTestPlan");
+	}
+	public static void waitfor() throws InterruptedException
+	{
+		Thread.sleep(3000);
+		/*
+		 * 
+		 
+		int i = 0;
+		while(i<10000)
+		{
+			i++;
+		}
+		*/
+	}
+
+}
